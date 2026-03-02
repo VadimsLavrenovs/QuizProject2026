@@ -12,18 +12,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Vadims Lavrenovs
- */
-
-/**
  * User klase ir bāzes klase visiem sistēmas lietotājiem.
  * Tā satur kopīgus datus un metodes gan Studentam, gan Administratoram.
+ * 
+ * Klase nodrošina:
+ *   Lietotāja autorizāciju sistēmā
+ *   Jauna studenta reģistrāciju
+ * 
+ * @author Vadims Lavrenovs
  */
 public class User {
 
+    /** Lietotāja pilnais vārds */
     protected String name;
+
+    /** Lietotāja pieteikšanās vārds */
     protected String login;
+
+    /** Lietotāja parole */
     protected String password;
 
     /**
@@ -47,7 +53,7 @@ public class User {
      */
     static public String enter(String login, String password) throws Exception {
 
-        String sql = "SELECT role FROM users WHERE login = ? AND password = ?";
+        String sql = "SELECT role FROM APP.users WHERE login = ? AND password = ?";
 
         try (Connection con = DataBase.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -65,13 +71,26 @@ public class User {
         }
     }
 
+     /**
+     * Reģistrē jaunu studentu sistēmā.
+     * 
+     * Metode pārbauda, vai login jau eksistē.
+     * Ja neeksistē, tiek izveidots jauns lietotājs ar lomu "student".
+     *
+     * @param name studenta vārds
+     * @param surname studenta uzvārds
+     * @param login izvēlētais pieteikšanās vārds
+     * @param password izvēlētā parole
+     * @return true, ja reģistrācija veiksmīga;
+     *         false, ja login jau eksistē vai radās kļūda
+     */
     public static boolean registerStudent(String name, String surname, String login, String password) {
 
-    String checkSql = "SELECT 1 FROM USERS WHERE LOGIN = ?";
-    String insertSql = "INSERT INTO USERS (NAME, LOGIN, PASSWORD, ROLE) VALUES (?, ?, ?, ?)";
+    String checkSql = "SELECT 1 FROM APP.USERS WHERE LOGIN = ?";
+    String insertSql = "INSERT INTO APP.USERS (NAME, LOGIN, PASSWORD, ROLE) VALUES (?, ?, ?, ?)";
 
     try (Connection con = DataBase.getConnection()) {
-
+        // Pārbaude, vai login jau eksistē
         try (PreparedStatement ps = con.prepareStatement(checkSql)) {
             ps.setString(1, login);
             try (ResultSet rs = ps.executeQuery()) {
@@ -80,7 +99,8 @@ public class User {
                 }
             }
         }
-
+        
+        // Jauna lietotāja pievienošana
         try (PreparedStatement ps = con.prepareStatement(insertSql)) {
             String fullName = name + " " + surname;
 
@@ -99,10 +119,16 @@ public class User {
 
     return false;
 }
+    /**
+     * @return lietotāja pieteikšanās vārds
+     */
     public String getLogin() {
         return login;
     }
 
+    /**
+     * @return lietotāja parole
+     */
     public String getPassword() {
         return password;
     }

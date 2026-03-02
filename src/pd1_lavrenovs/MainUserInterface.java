@@ -9,20 +9,35 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author User
+ * Galvenais lietotāja interfeiss (GUI) sistēmai.
+ * 
+ * Šī klase nodrošina:
+ *   Lietotāja autorizāciju
+ *   Studenta reģistrāciju
+ *   Testu pildīšanu
+ *   Testu veidošanu (admin)
+ *   Paroles maiņu
+ *   Rezultātu apskati
+ * 
+ * Interfeiss realizēts, izmantojot Java Swing komponentes.
+ * 
+ * @author Vadims Lavrenovs
+ * @version 1.0
+ * @since 2026
  */
 public class MainUserInterface extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainUserInterface
-     */
+ * Izveido galveno lietotāja interfeisa logu.
+ * Inicializē visas Swing komponentes.
+ */
     public MainUserInterface() {
         initComponents();
     }
     Admin admin = new Admin("admin", "admin", "parole");
     Student studentTest = new Student("student", "student", "parole");
     Test test = new Test();
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -849,7 +864,7 @@ public class MainUserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_RegistracijasPogaMouseClicked
 
     private void RegistracijasLogsWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_RegistracijasLogsWindowClosing
-        RegistracijasLogs.dispose();
+        RegistracijasLogs.dispose(); 
         this.setVisible(true);
     }//GEN-LAST:event_RegistracijasLogsWindowClosing
 
@@ -867,9 +882,10 @@ public class MainUserInterface extends javax.swing.JFrame {
 
             if (role == null) {
                 JOptionPane.showMessageDialog(null, "Nepareizs lietotājvārds vai parole");
+                
                 return;
             }
-
+            // Vlad lubit furry 
             switch (role) {
                 case "student":
                     LietotajaIzveleLogs.pack();

@@ -7,25 +7,28 @@ package pd1_lavrenovs;
 import java.util.List;
 
 /**
+ * Question klase apraksta vienu testa jautājumu.
+ * Tā satur jautājuma tekstu, pareizo atbildi un atbilžu variantus.
  *
  * @author Vadims Lavrenovs
- */
-
-/**
- * Question klase apraksta vienu testa jautājumu.
- * Tā satur jautājuma tekstu un pareizo atbildi.
+ * @version 1.1
  */
 public class Question {
 
+    /** Jautājuma teksts */
     private String text;
+
+    /** Pareizās atbildes teksts */
     private String answer;
+
+    /** Atbilžu varianti (A, B, C) */
     private List<String> answerOptions;
 
     /**
      * Jautājuma konstruktors.
      *
-     * @param text jautājuma teksts
-     * @param answer pareizā atbilde
+     * @param text          jautājuma teksts
+     * @param answer        pareizā atbilde
      * @param answerOptions atbilžu variantu saraksts
      */
     public Question(String text, String answer, List<String> answerOptions) {
@@ -34,6 +37,11 @@ public class Question {
         this.answerOptions = answerOptions;
     }
 
+    /**
+     * Atgriež atbilžu variantu sarakstu.
+     *
+     * @return atbilžu saraksts
+     */
     public List<String> getAnswerOptions() {
         return answerOptions;
     }
@@ -48,12 +56,22 @@ public class Question {
     }
 
     /**
-     * Pārbauda atbildes pareizību.
+     * Pārbauda, vai lietotāja atbilde ir pareiza.
+     * Salīdzināšana notiek neatkarīgi no reģistra.
      *
-     * @param answer lietotāja atbilde
-     * @return true, ja atbilde ir pareiza
+     * @param userAnswer lietotāja ievadītā atbilde
+     * @return {@code true}, ja atbilde ir pareiza; {@code false} citādi
      */
-    public boolean isCorrect(String answer) {
-        return this.answer.equalsIgnoreCase(answer);
+    public boolean isCorrect(String userAnswer) {
+        return this.answer.equalsIgnoreCase(userAnswer);
+    }
+
+    /**
+     * Atgriež pareizās atbildes tekstu.
+     *
+     * @return pareizā atbilde
+     */
+    public String getAnswer() {
+        return answer;
     }
 }

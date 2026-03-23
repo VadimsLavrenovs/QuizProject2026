@@ -132,4 +132,39 @@ public class User {
     public String getPassword() {
         return password;
     }
+    
+    /**
+     * Maina lietotāja paroli datubāzē.
+     * Vispirms pārbauda, vai pašreizējā parole ir pareiza.
+     *
+     * @param login       lietotāja pieteikšanās vārds
+     * @param oldPassword pašreizējā parole
+     * @param newPassword jaunā parole
+     * @return true ja parole nomainīta; false ja vecā parole nepareiza
+     */
+    public static boolean changePassword(String login, String oldPassword, String newPassword) {
+        String checkSql  = "SELECT 1 FROM APP.USERS WHERE LOGIN = ? AND PASSWORD = ?";
+        String updateSql = "UPDATE APP.USERS SET PASSWORD = ? WHERE LOGIN = ?";
+
+        try (Connection con = DataBase.getConnection()) {
+            // Pārbauda vai vecā parole ir pareiza
+            try (PreparedStatement ps = con.prepareStatement(checkSql)) {
+                ps.setString(1, login);
+                ps.setString(2, oldPassword);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (!rs.next()) return false; // vecā parole nepareiza
+                }
+            }
+            // Atjaunina uz jauno paroli
+            try (PreparedStatement ps = con.prepareStatement(updateSql)) {
+                ps.setString(1, newPassword);
+                ps.setString(2, login);
+                ps.executeUpdate();
+                return true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

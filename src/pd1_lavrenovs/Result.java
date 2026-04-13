@@ -138,4 +138,54 @@ public class Result {
     public void setComment(String comment) {
         this.comment = comment;
     }
+    
+    /**
+     * Saglabā testa rezultātu datubāzē.
+     *
+     * @param login lietotāja login
+     * @param testId testa ID
+     * @return true ja saglabāšana veiksmīga
+     */
+    public static boolean saveResultToDB(String login, int testId, 
+        int correct, int wrong, int unanswered, double grade) {
+        String sql = "INSERT INTO APP.RESULTS (USER_LOGIN, TEST_ID, "
+                   + "CORRECT_ANSWERS, WRONG_ANSWERS, UNANSWERED, GRADE) "
+                   + "VALUES (?, ?, ?, ?, ?, ?)";
+        try (java.sql.Connection con = DataBase.getConnection();
+             java.sql.PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, login);
+            ps.setInt(2, testId);
+            ps.setInt(3, correct);
+            ps.setInt(4, wrong);
+            ps.setInt(5, unanswered);
+            ps.setDouble(6, grade);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(Result.class.getName())
+                    .log(java.util.logging.Level.SEVERE, null, ex);
+            return false;
+        }
+        }
+
+        /**
+         * Ielādē vidējo atzīmi no datubāzes pēc lietotāja login.
+         *
+         * @param login lietotāja login
+         * @return vidējā atzīme vai 0.0 ja nav rezultātu
+         */
+        public static double loadAverageGrade(String login) {
+            String sql = "SELECT AVG(GRADE) FROM APP.RESULTS WHERE USER_LOGIN = ?";
+            try (java.sql.Connection con = DataBase.getConnection();
+                 java.sql.PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setString(1, login);
+                try (java.sql.ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) return rs.getDouble(1);
+                }
+            } catch (Exception ex) {
+                java.util.logging.Logger.getLogger(Result.class.getName())
+                        .log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            return 0.0;
+        }
 }

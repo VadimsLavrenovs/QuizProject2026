@@ -10,17 +10,12 @@ import javax.swing.JOptionPane;
 
 /**
  * Galvenais lietotāja interfeiss (GUI) sistēmai.
- * 
- * Šī klase nodrošina:
- *   Lietotāja autorizāciju
- *   Studenta reģistrāciju
- *   Testu pildīšanu
- *   Testu veidošanu (admin)
- *   Paroles maiņu
- *   Rezultātu apskati
- * 
+ *
+ * Šī klase nodrošina: Lietotāja autorizāciju Studenta reģistrāciju Testu
+ * pildīšanu Testu veidošanu (admin) Paroles maiņu Rezultātu apskati
+ *
  * Interfeiss realizēts, izmantojot Java Swing komponentes.
- * 
+ *
  * @author Vadims Lavrenovs
  * @version 1.0
  * @since 2026
@@ -28,9 +23,9 @@ import javax.swing.JOptionPane;
 public class MainUserInterface extends javax.swing.JFrame {
 
     /**
- * Izveido galveno lietotāja interfeisa logu.
- * Inicializē visas Swing komponentes.
- */
+     * Izveido galveno lietotāja interfeisa logu. Inicializē visas Swing
+     * komponentes.
+     */
     public MainUserInterface() {
         initComponents();
     }
@@ -38,26 +33,37 @@ public class MainUserInterface extends javax.swing.JFrame {
     Student studentTest = new Student("student", "student", "parole");
     Test test = new Test();
     // --- Testa pildīšanas stāvokļa mainīgie ---
-    /** Pašreizējā jautājuma indekss testa laikā */
-    private int  currentQuestionIndex = 0;
-    /** Rezultātu objekts kārtējam testam */
+    /**
+     * Pašreizējā jautājuma indekss testa laikā
+     */
+    private int currentQuestionIndex = 0;
+    /**
+     * Rezultātu objekts kārtējam testam
+     */
     private Result currentResult = null;
-    /** Vai students jau izvēlējies kādu atbildi šim jautājumam */
+    /**
+     * Vai students jau izvēlējies kādu atbildi šim jautājumam
+     */
     private boolean answered = false;
-    /** Tekošā lietotāja login (saglabāts pēc ielogošanās) */
+    /**
+     * Tekošā lietotāja login (saglabāts pēc ielogošanās)
+     */
     private String loggedInLogin = "";
     private String currentRole = "";
 
     // --- Admin testa veidošanas stāvokļa mainīgie ---
-    /** Pašreizējā izveidojamā testa ID */
-    private int  currentAdminTestId = -1;
-    /** Pašreizējā jautājuma numurs veidošanas procesā */
-    private int  adminQuestionNumber = 1;
-    
-    private java.util.List<Double> atzimes = new java.util.ArrayList<>();
+    /**
+     * Pašreizējā izveidojamā testa ID
+     */
+    private int currentAdminTestId = -1;
+    /**
+     * Pašreizējā jautājuma numurs veidošanas procesā
+     */
+    private int adminQuestionNumber = 1;
+
+
     private java.util.Map<Integer, Integer> testCounts = new java.util.HashMap<>();
     private int currentTestId = -1;
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,6 +130,7 @@ public class MainUserInterface extends javax.swing.JFrame {
         LabelSveikiAdmin = new javax.swing.JLabel();
         IerobezotSkPoga = new javax.swing.JButton();
         SaktTestuPoga = new javax.swing.JButton();
+        LietotajaLomaPoga = new javax.swing.JButton();
         SaktTestuAdminLogs = new javax.swing.JDialog();
         IerobezotTestuPoga = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
@@ -136,7 +143,7 @@ public class MainUserInterface extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        VidAtzimelogs = new javax.swing.JDialog();
+        VidAtzimeLogs = new javax.swing.JDialog();
         aizvertRez1 = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -722,6 +729,15 @@ public class MainUserInterface extends javax.swing.JFrame {
             }
         });
 
+        LietotajaLomaPoga.setBackground(new java.awt.Color(255, 204, 204));
+        LietotajaLomaPoga.setForeground(new java.awt.Color(255, 102, 102));
+        LietotajaLomaPoga.setText("Lietotāja loma");
+        LietotajaLomaPoga.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LietotajaLomaPogaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout LietotajaIzveleAdminLogsLayout = new javax.swing.GroupLayout(LietotajaIzveleAdminLogs.getContentPane());
         LietotajaIzveleAdminLogs.getContentPane().setLayout(LietotajaIzveleAdminLogsLayout);
         LietotajaIzveleAdminLogsLayout.setHorizontalGroup(
@@ -733,6 +749,7 @@ public class MainUserInterface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LietotajaIzveleAdminLogsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(LietotajaIzveleAdminLogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LietotajaLomaPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SaktTestuPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MainitParoliPoga1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(VeidotTestuPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -744,7 +761,9 @@ public class MainUserInterface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LietotajaIzveleAdminLogsLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(LabelSveikiAdmin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(LietotajaLomaPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(SaktTestuPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(VeidotTestuPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -908,9 +927,9 @@ public class MainUserInterface extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        VidAtzimelogs.addWindowListener(new java.awt.event.WindowAdapter() {
+        VidAtzimeLogs.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                VidAtzimelogsWindowClosing(evt);
+                VidAtzimeLogsWindowClosing(evt);
             }
         });
 
@@ -932,25 +951,25 @@ public class MainUserInterface extends javax.swing.JFrame {
         jLabel24.setForeground(new java.awt.Color(255, 153, 153));
         jLabel24.setText("Atzīme: A");
 
-        javax.swing.GroupLayout VidAtzimelogsLayout = new javax.swing.GroupLayout(VidAtzimelogs.getContentPane());
-        VidAtzimelogs.getContentPane().setLayout(VidAtzimelogsLayout);
-        VidAtzimelogsLayout.setHorizontalGroup(
-            VidAtzimelogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VidAtzimelogsLayout.createSequentialGroup()
-                .addGroup(VidAtzimelogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VidAtzimelogsLayout.createSequentialGroup()
+        javax.swing.GroupLayout VidAtzimeLogsLayout = new javax.swing.GroupLayout(VidAtzimeLogs.getContentPane());
+        VidAtzimeLogs.getContentPane().setLayout(VidAtzimeLogsLayout);
+        VidAtzimeLogsLayout.setHorizontalGroup(
+            VidAtzimeLogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VidAtzimeLogsLayout.createSequentialGroup()
+                .addGroup(VidAtzimeLogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VidAtzimeLogsLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addGroup(VidAtzimelogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(VidAtzimeLogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(aizvertRez1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22)))
-                    .addGroup(VidAtzimelogsLayout.createSequentialGroup()
+                    .addGroup(VidAtzimeLogsLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jLabel24)))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
-        VidAtzimelogsLayout.setVerticalGroup(
-            VidAtzimelogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VidAtzimelogsLayout.createSequentialGroup()
+        VidAtzimeLogsLayout.setVerticalGroup(
+            VidAtzimeLogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VidAtzimeLogsLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel22)
                 .addGap(18, 18, 18)
@@ -1048,7 +1067,7 @@ public class MainUserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_RegistracijasPogaMouseClicked
 
     private void RegistracijasLogsWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_RegistracijasLogsWindowClosing
-        RegistracijasLogs.dispose(); 
+        RegistracijasLogs.dispose();
         this.setVisible(true);
     }//GEN-LAST:event_RegistracijasLogsWindowClosing
 
@@ -1059,7 +1078,7 @@ public class MainUserInterface extends javax.swing.JFrame {
 
     private void IelogosanasPogaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IelogosanasPogaMouseClicked
         try {
-            String userLogin    = jTextField1.getText().trim();
+            String userLogin = jTextField1.getText().trim();
             String userPassword = jPasswordField1.getText();
 
             String role = User.enter(userLogin, userPassword);
@@ -1071,19 +1090,22 @@ public class MainUserInterface extends javax.swing.JFrame {
 
             loggedInLogin = userLogin;
             currentRole = role;
-            
+
             switch (role) {
                 case "student":
-                    // Ielādē studenta vārdu no DB priekš sveiciena
                     studentTest = loadStudentByLogin(userLogin);
+                    LabelSveiki.setText("Sveiki " + studentTest.name + "!");
                     this.setVisible(false);
+                    LietotajaIzveleLogs.setVisible(false); // ← pievieno
                     LietotajaIzveleLogs.pack();
                     LietotajaIzveleLogs.setLocationRelativeTo(null);
                     LietotajaIzveleLogs.setVisible(true);
                     break;
                 case "admin":
                     studentTest = loadStudentByLogin(userLogin);
+                    LabelSveikiAdmin.setText("Sveiki " + studentTest.name + "!");
                     this.setVisible(false);
+                    LietotajaIzveleAdminLogs.setVisible(false); // ← pievieno
                     LietotajaIzveleAdminLogs.pack();
                     LietotajaIzveleAdminLogs.setLocationRelativeTo(null);
                     LietotajaIzveleAdminLogs.setVisible(true);
@@ -1103,8 +1125,12 @@ public class MainUserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_IelogosanasPogaMouseClicked
 
     private void LietotajaIzveleLogsWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_LietotajaIzveleLogsWindowClosing
-        atzimes.clear();
         testCounts.clear();
+        loggedInLogin = "";
+        currentRole = "";
+        studentTest = new Student("", "", ""); // ← atjauno studentu
+        jTextField1.setText("");               // ← notīra login lauku
+        jPasswordField1.setText("");           // ← notīra paroles lauku
         LietotajaIzveleLogs.setVisible(false);
         this.setVisible(true);
     }//GEN-LAST:event_LietotajaIzveleLogsWindowClosing
@@ -1164,7 +1190,7 @@ public class MainUserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_SaktTestuLogsWindowClosing
 
     private void SaktTestuPogaUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaktTestuPogaUserMouseClicked
-        
+
         java.util.Map<Integer, String> testi = Test.loadTestListFromDB();
         if (testi.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nav pieejamu testu!");
@@ -1179,12 +1205,14 @@ public class MainUserInterface extends javax.swing.JFrame {
             i++;
         }
         String izvele = (String) JOptionPane.showInputDialog(
-            SaktTestuLogs,
-            "Izvēlies testu:",
-            "Testu saraksts",
-            JOptionPane.QUESTION_MESSAGE,
-            null, opcijas, opcijas[0]);
-        if (izvele == null) return;
+                SaktTestuLogs,
+                "Izvēlies testu:",
+                "Testu saraksts",
+                JOptionPane.QUESTION_MESSAGE,
+                null, opcijas, opcijas[0]);
+        if (izvele == null) {
+            return;
+        }
 
         int selectedId = -1;
         for (int j = 0; j < opcijas.length; j++) {
@@ -1194,16 +1222,16 @@ public class MainUserInterface extends javax.swing.JFrame {
             }
         }
         if (!Test.isTestActive(selectedId)) {
-        JOptionPane.showMessageDialog(null, 
-            "Šis tests vēl nav startēts! Sazinieties ar administratoru.");
-        return;
+            JOptionPane.showMessageDialog(null,
+                    "Šis tests vēl nav startēts! Sazinieties ar administratoru.");
+            return;
         }
         currentTestId = selectedId;
         int limit = Test.getRetakeLimit(currentTestId);
         int count = testCounts.getOrDefault(currentTestId, 0);
         if (limit > 0 && count >= limit) {
-            JOptionPane.showMessageDialog(null, 
-                "Tu esi sasniedzis maksimālo atkārtojumu skaitu (" + limit + ")!");
+            JOptionPane.showMessageDialog(null,
+                    "Tu esi sasniedzis maksimālo atkārtojumu skaitu (" + limit + ")!");
             return;
         }
 
@@ -1225,15 +1253,15 @@ public class MainUserInterface extends javax.swing.JFrame {
 
     private void AtbildUzJautajumiemLogsWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_AtbildUzJautajumiemLogsWindowClosing
         AtbildUzJautajumiemLogs.setVisible(false);
-    if (currentRole.equals("admin")) {
-        LietotajaIzveleAdminLogs.pack();
-        LietotajaIzveleAdminLogs.setLocationRelativeTo(null);
-        LietotajaIzveleAdminLogs.setVisible(true);
-    } else {
-        LietotajaIzveleLogs.pack();
-        LietotajaIzveleLogs.setLocationRelativeTo(null);
-        LietotajaIzveleLogs.setVisible(true);
-    }
+        if (currentRole.equals("admin")) {
+            LietotajaIzveleAdminLogs.pack();
+            LietotajaIzveleAdminLogs.setLocationRelativeTo(null);
+            LietotajaIzveleAdminLogs.setVisible(true);
+        } else {
+            LietotajaIzveleLogs.pack();
+            LietotajaIzveleLogs.setLocationRelativeTo(null);
+            LietotajaIzveleLogs.setVisible(true);
+        }
     }//GEN-LAST:event_AtbildUzJautajumiemLogsWindowClosing
 
     private void MainitParoliPoga1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MainitParoliPoga1MouseClicked
@@ -1243,7 +1271,12 @@ public class MainUserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_MainitParoliPoga1MouseClicked
 
     private void LietotajaIzveleAdminLogsWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_LietotajaIzveleAdminLogsWindowClosing
-        LietotajaIzveleAdminLogs.dispose();
+        loggedInLogin = "";
+        currentRole = "";
+        studentTest = new Student("", "", ""); // ← atjauno studentu
+        jTextField1.setText("");               // ← notīra login lauku
+        jPasswordField1.setText("");           // ← notīra paroles lauku
+        LietotajaIzveleAdminLogs.setVisible(false);
         this.setVisible(true);
     }//GEN-LAST:event_LietotajaIzveleAdminLogsWindowClosing
 
@@ -1272,24 +1305,28 @@ public class MainUserInterface extends javax.swing.JFrame {
         }
 
         String izvele = (String) JOptionPane.showInputDialog(
-            LietotajaIzveleAdminLogs,
-            "Izvēlies testu vai izveido jaunu:",
-            "Testu pārvaldība",
-            JOptionPane.QUESTION_MESSAGE,
-            null, opcijas, opcijas[0]);
+                LietotajaIzveleAdminLogs,
+                "Izvēlies testu vai izveido jaunu:",
+                "Testu pārvaldība",
+                JOptionPane.QUESTION_MESSAGE,
+                null, opcijas, opcijas[0]);
 
-        if (izvele == null) return;
+        if (izvele == null) {
+            return;
+        }
 
         if (izvele.equals("➕ Izveidot jaunu testu")) {
             // Jauns tests
             String nosaukums = JOptionPane.showInputDialog(null, "Ievadi testa nosaukumu:");
-            if (nosaukums == null || nosaukums.trim().isEmpty()) return;
+            if (nosaukums == null || nosaukums.trim().isEmpty()) {
+                return;
+            }
 
             // Pārbauda vai tāds nosaukums jau eksistē
             int existingId = Test.getTestIdByName(nosaukums.trim());
             if (existingId > 0) {
-                JOptionPane.showMessageDialog(null, 
-                    "Tests ar šādu nosaukumu jau eksistē! Izvēlies to no saraksta.");
+                JOptionPane.showMessageDialog(null,
+                        "Tests ar šādu nosaukumu jau eksistē! Izvēlies to no saraksta.");
                 return;
             }
 
@@ -1307,8 +1344,8 @@ public class MainUserInterface extends javax.swing.JFrame {
                     break;
                 }
             }
-            JOptionPane.showMessageDialog(null, 
-                "Rediģē testu: \"" + izvele + "\" (ID: " + currentAdminTestId + ")");
+            JOptionPane.showMessageDialog(null,
+                    "Rediģē testu: \"" + izvele + "\" (ID: " + currentAdminTestId + ")");
         }
 
         adminQuestionNumber = 1;
@@ -1370,13 +1407,14 @@ public class MainUserInterface extends javax.swing.JFrame {
 
     private void LietotajaIzveleLogsWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_LietotajaIzveleLogsWindowOpened
         this.setVisible(false);
-        LabelSveiki.setText("Sveiki " + studentTest.name + "!");
+        
         PilditTestuPoga.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
         MainitParoliPoga.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
         VidAtzime.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
 
         LietotajaIzveleLogs.pack();
         LietotajaIzveleLogs.setLocationRelativeTo(null);
+        testCounts.clear();
     }//GEN-LAST:event_LietotajaIzveleLogsWindowOpened
 
     private void LietotajaIzveleAdminLogsWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_LietotajaIzveleAdminLogsWindowOpened
@@ -1386,13 +1424,19 @@ public class MainUserInterface extends javax.swing.JFrame {
 
     private void TalakPogaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TalakPogaMouseClicked
         Question q = test.getQuestion(currentQuestionIndex);
-        if (q == null) return;
+        if (q == null) {
+            return;
+        }
 
         // Nosaka, kura checkbox ir atzīmēta
         String chosen = null;
-        if (jCheckBox5.isSelected()) chosen = jCheckBox5.getText();
-        else if (jCheckBox6.isSelected()) chosen = jCheckBox6.getText();
-        else if (jCheckBox4.isSelected()) chosen = jCheckBox4.getText();
+        if (jCheckBox5.isSelected()) {
+            chosen = jCheckBox5.getText();
+        } else if (jCheckBox6.isSelected()) {
+            chosen = jCheckBox6.getText();
+        } else if (jCheckBox4.isSelected()) {
+            chosen = jCheckBox4.getText();
+        }
 
         if (chosen == null) {
             // Nav izvēlēta neviena atbilde
@@ -1412,11 +1456,18 @@ public class MainUserInterface extends javax.swing.JFrame {
             showQuestion(currentQuestionIndex);
         } else {
             // Tests beigts — aprēķina atzīmi un parāda rezultātus
-            double grade   = currentResult.calculateGrade();
-            atzimes.add(grade);
+            double grade = currentResult.calculateGrade();
+            // Saglabā rezultātu DB
+            Result.saveResultToDB(
+                loggedInLogin,
+                currentTestId,
+                currentResult.getCorrectAnswers(),
+                currentResult.getWrongAnswers(),
+                currentResult.getUnanswered(),
+                grade);
             testCounts.put(currentTestId, testCounts.getOrDefault(currentTestId, 0) + 1);
             double percent = (double) currentResult.getCorrectAnswers()
-                             / test.getQuestionCount() * 100;
+                    / test.getQuestionCount() * 100;
 
             jLabel20.setText(String.format("Procenti: %.0f%%", percent));
             jLabel21.setText(String.format("Atzīme: %.1f", grade));
@@ -1435,13 +1486,13 @@ public class MainUserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_DzestAtbildiPogaMouseClicked
 
     private void SaktTestuPogaAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaktTestuPogaAdminMouseClicked
-    
+
     }//GEN-LAST:event_SaktTestuPogaAdminMouseClicked
 
     private void JaunsJautaumsPogaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JaunsJautaumsPogaMouseClicked
         if (currentAdminTestId < 0) {
-        JOptionPane.showMessageDialog(null, "Vispirms izveido testu!");
-        return;
+            JOptionPane.showMessageDialog(null, "Vispirms izveido testu!");
+            return;
         }
 
         String jautajums = tfJautajums.getText().trim();
@@ -1462,9 +1513,9 @@ public class MainUserInterface extends javax.swing.JFrame {
         }
 
         boolean ok = Test.saveQuestionToDB(
-            jautajums, pareiza,
-            opt1, opt2, opt3,
-            currentAdminTestId);
+                jautajums, pareiza,
+                opt1, opt2, opt3,
+                currentAdminTestId);
 
         if (ok) {
             adminQuestionNumber++;
@@ -1473,8 +1524,8 @@ public class MainUserInterface extends javax.swing.JFrame {
             tfAtbilde2.setText("");
             tfAtbilde3.setText("");
             cbPareiza.removeAllItems();
-            JOptionPane.showMessageDialog(TestaIzveidosanaLogs, 
-                "Jautājums Nr." + (adminQuestionNumber - 1) + " saglabāts!");
+            JOptionPane.showMessageDialog(TestaIzveidosanaLogs,
+                    "Jautājums Nr." + (adminQuestionNumber - 1) + " saglabāts!");
         } else {
             JOptionPane.showMessageDialog(TestaIzveidosanaLogs, "Kļūda saglabājot!");
         }
@@ -1487,8 +1538,8 @@ public class MainUserInterface extends javax.swing.JFrame {
 
     private void ApstiprinatParolePogaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApstiprinatParolePogaMouseClicked
         String currentPass = jTextField10.getText().trim();
-        String newPass     = jTextField12.getText().trim();
-        String repeatPass  = jTextField13.getText().trim();
+        String newPass = jTextField12.getText().trim();
+        String repeatPass = jTextField13.getText().trim();
 
         // Pārbaudes
         if (currentPass.isEmpty() || newPass.isEmpty() || repeatPass.isEmpty()) {
@@ -1523,15 +1574,21 @@ public class MainUserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_ApstiprinatParolePogaMouseClicked
 
     private void tfAtbilde1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAtbilde1KeyReleased
-            String opt1 = tfAtbilde1.getText().trim();
+        String opt1 = tfAtbilde1.getText().trim();
         String opt2 = tfAtbilde2.getText().trim();
         String opt3 = tfAtbilde3.getText().trim();
 
         int selected = cbPareiza.getSelectedIndex();
         cbPareiza.removeAllItems();
-        if (!opt1.isEmpty()) cbPareiza.addItem(opt1);
-        if (!opt2.isEmpty()) cbPareiza.addItem(opt2);
-        if (!opt3.isEmpty()) cbPareiza.addItem(opt3);
+        if (!opt1.isEmpty()) {
+            cbPareiza.addItem(opt1);
+        }
+        if (!opt2.isEmpty()) {
+            cbPareiza.addItem(opt2);
+        }
+        if (!opt3.isEmpty()) {
+            cbPareiza.addItem(opt3);
+        }
 
         if (selected >= 0 && selected < cbPareiza.getItemCount()) {
             cbPareiza.setSelectedIndex(selected);
@@ -1540,15 +1597,21 @@ public class MainUserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_tfAtbilde1KeyReleased
 
     private void tfAtbilde2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAtbilde2KeyReleased
-            String opt1 = tfAtbilde1.getText().trim();
+        String opt1 = tfAtbilde1.getText().trim();
         String opt2 = tfAtbilde2.getText().trim();
         String opt3 = tfAtbilde3.getText().trim();
 
         int selected = cbPareiza.getSelectedIndex();
         cbPareiza.removeAllItems();
-        if (!opt1.isEmpty()) cbPareiza.addItem(opt1);
-        if (!opt2.isEmpty()) cbPareiza.addItem(opt2);
-        if (!opt3.isEmpty()) cbPareiza.addItem(opt3);
+        if (!opt1.isEmpty()) {
+            cbPareiza.addItem(opt1);
+        }
+        if (!opt2.isEmpty()) {
+            cbPareiza.addItem(opt2);
+        }
+        if (!opt3.isEmpty()) {
+            cbPareiza.addItem(opt3);
+        }
 
         if (selected >= 0 && selected < cbPareiza.getItemCount()) {
             cbPareiza.setSelectedIndex(selected);
@@ -1556,15 +1619,21 @@ public class MainUserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_tfAtbilde2KeyReleased
 
     private void tfAtbilde3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAtbilde3KeyReleased
-            String opt1 = tfAtbilde1.getText().trim();
+        String opt1 = tfAtbilde1.getText().trim();
         String opt2 = tfAtbilde2.getText().trim();
         String opt3 = tfAtbilde3.getText().trim();
 
         int selected = cbPareiza.getSelectedIndex();
         cbPareiza.removeAllItems();
-        if (!opt1.isEmpty()) cbPareiza.addItem(opt1);
-        if (!opt2.isEmpty()) cbPareiza.addItem(opt2);
-        if (!opt3.isEmpty()) cbPareiza.addItem(opt3);
+        if (!opt1.isEmpty()) {
+            cbPareiza.addItem(opt1);
+        }
+        if (!opt2.isEmpty()) {
+            cbPareiza.addItem(opt2);
+        }
+        if (!opt3.isEmpty()) {
+            cbPareiza.addItem(opt3);
+        }
 
         if (selected >= 0 && selected < cbPareiza.getItemCount()) {
             cbPareiza.setSelectedIndex(selected);
@@ -1585,39 +1654,34 @@ public class MainUserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_aizvertRezMouseClicked
 
     private void aizvertRez1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aizvertRez1MouseClicked
-        VidAtzimelogs.setVisible(false);
+        VidAtzimeLogs.setVisible(false);
         LietotajaIzveleLogs.pack();
         LietotajaIzveleLogs.setLocationRelativeTo(null);
         LietotajaIzveleLogs.setVisible(true);
     }//GEN-LAST:event_aizvertRez1MouseClicked
 
     private void VidAtzimeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VidAtzimeMouseClicked
-        if (atzimes.isEmpty()) {
-        jLabel24.setText("Vidējā atzīme: nav datu");
-        }
-        else {
-            double videja = 0;
-            for (double a : atzimes) {
-                videja += a;
-            }
-            videja = videja / atzimes.size();
+        double videja = Result.loadAverageGrade(loggedInLogin);
+    
+        if (videja == 0.0) {
+            jLabel24.setText("Vidējā atzīme: nav datu");
+        } else {
             jLabel24.setText(String.format("Vidējā atzīme: %.1f", videja));
         }
 
-        VidAtzimelogs.pack();
-        VidAtzimelogs.setLocationRelativeTo(null);
-        VidAtzimelogs.setBounds(0, 0, 280, 190);
+        VidAtzimeLogs.pack();
+        VidAtzimeLogs.setLocationRelativeTo(null);
         LietotajaIzveleLogs.setVisible(false);
-        VidAtzimelogs.setVisible(true);
+        VidAtzimeLogs.setVisible(true);
     }//GEN-LAST:event_VidAtzimeMouseClicked
 
     private void VidAtzimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VidAtzimeActionPerformed
-       
+
     }//GEN-LAST:event_VidAtzimeActionPerformed
 
     private void IerobezotSkPogaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IerobezotSkPogaMouseClicked
         java.util.Map<Integer, String> testi = Test.loadTestListFromDB();
-    
+
         if (testi.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nav pieejamu testu!");
             return;
@@ -1633,13 +1697,15 @@ public class MainUserInterface extends javax.swing.JFrame {
         }
 
         String izvele = (String) JOptionPane.showInputDialog(
-            LietotajaIzveleAdminLogs,
-            "Izvēlies testu:",
-            "Ierobežojuma uzstādīšana",
-            JOptionPane.QUESTION_MESSAGE,
-            null, opcijas, opcijas[0]);
+                LietotajaIzveleAdminLogs,
+                "Izvēlies testu:",
+                "Ierobežojuma uzstādīšana",
+                JOptionPane.QUESTION_MESSAGE,
+                null, opcijas, opcijas[0]);
 
-        if (izvele == null) return;
+        if (izvele == null) {
+            return;
+        }
 
         int selectedId = -1;
         for (int j = 0; j < opcijas.length; j++) {
@@ -1650,27 +1716,29 @@ public class MainUserInterface extends javax.swing.JFrame {
         }
 
         String limitStr = JOptionPane.showInputDialog(
-            LietotajaIzveleAdminLogs,
-            "Cik reizes var pildīt testu \"" + izvele + "\"?\n(0 = neierobežoti)");
+                LietotajaIzveleAdminLogs,
+                "Cik reizes var pildīt testu \"" + izvele + "\"?\n(0 = neierobežoti)");
 
-        if (limitStr == null || limitStr.trim().isEmpty()) return;
+        if (limitStr == null || limitStr.trim().isEmpty()) {
+            return;
+        }
 
         try {
             int limit = Integer.parseInt(limitStr.trim());
             Test.setRetakeLimit(selectedId, limit);
-            JOptionPane.showMessageDialog(LietotajaIzveleAdminLogs, 
-                "Limits uzstādīts: \"" + izvele + "\" → " + limit + " reizes!");
+            JOptionPane.showMessageDialog(LietotajaIzveleAdminLogs,
+                    "Limits uzstādīts: \"" + izvele + "\" → " + limit + " reizes!");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Ievadi veselu skaitli!");
         }
     }//GEN-LAST:event_IerobezotSkPogaMouseClicked
 
-    private void VidAtzimelogsWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_VidAtzimelogsWindowClosing
-        VidAtzimelogs.setVisible(false);
+    private void VidAtzimeLogsWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_VidAtzimeLogsWindowClosing
+        VidAtzimeLogs.setVisible(false);
         LietotajaIzveleLogs.pack();
         LietotajaIzveleLogs.setLocationRelativeTo(null);
         LietotajaIzveleLogs.setVisible(true);
-    }//GEN-LAST:event_VidAtzimelogsWindowClosing
+    }//GEN-LAST:event_VidAtzimeLogsWindowClosing
 
     private void SaktTestuPogaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaktTestuPogaMouseClicked
         java.util.Map<Integer, String> testi = Test.loadTestListFromDB();
@@ -1690,13 +1758,15 @@ public class MainUserInterface extends javax.swing.JFrame {
         }
 
         String izvele = (String) JOptionPane.showInputDialog(
-            LietotajaIzveleAdminLogs,
-            "Izvēlies testu:",
-            "Testa pārvaldība",
-            JOptionPane.QUESTION_MESSAGE,
-            null, opcijas, opcijas[0]);
+                LietotajaIzveleAdminLogs,
+                "Izvēlies testu:",
+                "Testa pārvaldība",
+                JOptionPane.QUESTION_MESSAGE,
+                null, opcijas, opcijas[0]);
 
-        if (izvele == null) return;
+        if (izvele == null) {
+            return;
+        }
 
         int selectedId = -1;
         for (int j = 0; j < opcijas.length; j++) {
@@ -1709,22 +1779,101 @@ public class MainUserInterface extends javax.swing.JFrame {
         // Pārbauda vai tests jau ir aktīvs
         if (Test.isTestActive(selectedId)) {
             int izvele2 = JOptionPane.showConfirmDialog(
-                LietotajaIzveleAdminLogs,
-                "Tests \"" + izvele + "\" jau ir aktīvs! Vai vēlies to aizvērt?",
-                "Tests aktīvs",
-                JOptionPane.YES_NO_OPTION);
+                    LietotajaIzveleAdminLogs,
+                    "Tests \"" + izvele + "\" jau ir aktīvs! Vai vēlies to aizvērt?",
+                    "Tests aktīvs",
+                    JOptionPane.YES_NO_OPTION);
 
             if (izvele2 == JOptionPane.YES_OPTION) {
                 Test.setTestActive(selectedId, false);
                 JOptionPane.showMessageDialog(LietotajaIzveleAdminLogs,
-                    "Tests \"" + izvele + "\" ir aizvērts!");
+                        "Tests \"" + izvele + "\" ir aizvērts!");
             }
         } else {
             Test.setTestActive(selectedId, true);
             JOptionPane.showMessageDialog(LietotajaIzveleAdminLogs,
-                "Tests \"" + izvele + "\" ir startēts!");
+                    "Tests \"" + izvele + "\" ir startēts!");
         }
     }//GEN-LAST:event_SaktTestuPogaMouseClicked
+
+    private void LietotajaLomaPogaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LietotajaLomaPogaMouseClicked
+        java.util.Map<Integer, String> lietotaji = User.getAllUsers();
+
+        if (lietotaji.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nav lietotāju!");
+            return;
+        }
+
+        String[] opcijas = new String[lietotaji.size()];
+        Integer[] ids = new Integer[lietotaji.size()];
+        int i = 0;
+        for (java.util.Map.Entry<Integer, String> e : lietotaji.entrySet()) {
+            ids[i] = e.getKey();
+            opcijas[i] = e.getValue();
+            i++;
+        }
+
+        String izvele = (String) JOptionPane.showInputDialog(
+                LietotajaIzveleAdminLogs,
+                "Izvēlies lietotāju:",
+                "Lomas maiņa",
+                JOptionPane.QUESTION_MESSAGE,
+                null, opcijas, opcijas[0]);
+
+        if (izvele == null) {
+            return;
+        }
+
+        int selectedId = -1;
+        for (int j = 0; j < opcijas.length; j++) {
+            if (opcijas[j].equals(izvele)) {
+                selectedId = ids[j];
+                break;
+            }
+        }
+
+        // Nolasa pašreizējo lomu no teksta iekavās
+        String paresejalaoma = izvele.substring(
+                izvele.lastIndexOf("(") + 1, izvele.lastIndexOf(")"));
+
+        // Atrod pašreizējā admina ID
+        int adminId = User.getIdByLogin(loggedInLogin);
+
+        // Pārbauda vai izvēlētais ir cits admins
+        if (paresejalaoma.equals("admin") && selectedId != adminId) {
+            JOptionPane.showMessageDialog(null, "Nevar mainīt cita admina lomu!");
+            return;
+        }
+
+        // Nosaka pieejamās lomas
+        String[] lomas;
+        if (selectedId == adminId) {
+            // Savai lomai var mainīt tikai uz student
+            lomas = new String[]{"student"};
+        } else {
+            // Studentam var mainīt uz admin
+            lomas = new String[]{"admin"};
+        }
+
+        String jaunaLoma = (String) JOptionPane.showInputDialog(
+                LietotajaIzveleAdminLogs,
+                "Izvēlies jauno lomu:\n" + izvele,
+                "Jaunā loma",
+                JOptionPane.QUESTION_MESSAGE,
+                null, lomas, lomas[0]);
+
+        if (jaunaLoma == null) {
+            return;
+        }
+
+        boolean ok = User.changeRole(selectedId, jaunaLoma);
+        if (ok) {
+            JOptionPane.showMessageDialog(LietotajaIzveleAdminLogs,
+                    "Loma veiksmīgi nomainīta uz \"" + jaunaLoma + "\"!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Kļūda mainot lomu!");
+        }
+    }//GEN-LAST:event_LietotajaLomaPogaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1760,16 +1909,18 @@ public class MainUserInterface extends javax.swing.JFrame {
             }
         });
     }
-    
+
     /**
-     * Parāda jautājumu ar norādīto indeksu atbildes logā.
-     * Iestata jLabel15 tekstu un jCheckBox4/5/6 vērtības.
+     * Parāda jautājumu ar norādīto indeksu atbildes logā. Iestata jLabel15
+     * tekstu un jCheckBox4/5/6 vērtības.
      *
      * @param index jautājuma indekss sarakstā
      */
     private void showQuestion(int index) {
         Question q = test.getQuestion(index);
-        if (q == null) return;
+        if (q == null) {
+            return;
+        }
 
         jLabel15.setText((index + 1) + ". jautājums: " + q.getText());
 
@@ -1785,16 +1936,15 @@ public class MainUserInterface extends javax.swing.JFrame {
     }
 
     /**
-     * Ielādē studenta objektu no datubāzes pēc login.
-     * Ja notiek kļūda, atgriež noklusēto studentTest objektu.
+     * Ielādē studenta objektu no datubāzes pēc login. Ja notiek kļūda, atgriež
+     * noklusēto studentTest objektu.
      *
      * @param login pieteikšanās vārds
      * @return {@link Student} objekts ar vārdu no DB
      */
     private Student loadStudentByLogin(String login) {
         String sql = "SELECT NAME FROM APP.USERS WHERE LOGIN = ?";
-        try (java.sql.Connection con = DataBase.getConnection();
-             java.sql.PreparedStatement ps = con.prepareStatement(sql)) {
+        try (java.sql.Connection con = DataBase.getConnection(); java.sql.PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, login);
             try (java.sql.ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -1807,14 +1957,14 @@ public class MainUserInterface extends javax.swing.JFrame {
         }
         return new Student(login, login, "");
     }
-    
+
     /**
-     * Sagatavo testa veidošanas formu jaunam jautājumam.
-     * Atjauno jLabel10 skaitītāju un iztīra checkbox tekstus un ievades laukus.
+     * Sagatavo testa veidošanas formu jaunam jautājumam. Atjauno jLabel10
+     * skaitītāju un iztīra checkbox tekstus un ievades laukus.
      * <p>
-     * Piezīme: šī metode izmanto jCheckBox1/2/3 kā ievades laukus
-     * (admin ievada atbilžu tekstus tieši checkbox etiķetēs —
-     * ja vēlies pilnvērtīgāku UI, rekomendē pievienot atsevišķus JTextField).
+     * Piezīme: šī metode izmanto jCheckBox1/2/3 kā ievades laukus (admin ievada
+     * atbilžu tekstus tieši checkbox etiķetēs — ja vēlies pilnvērtīgāku UI,
+     * rekomendē pievienot atsevišķus JTextField).
      * </p>
      */
     private void prepareAdminQuestionForm() {
@@ -1826,11 +1976,12 @@ public class MainUserInterface extends javax.swing.JFrame {
     }
 
     /**
-     * Nolasa admin ievadītos datus no TestaIzveidosanaLogs formas
-     * un saglabā jautājumu datubāzē.
+     * Nolasa admin ievadītos datus no TestaIzveidosanaLogs formas un saglabā
+     * jautājumu datubāzē.
      *
-     * <p>Pareizā atbilde ir tā checkbox, kas ir atzīmēta.
-     * Jautājuma teksts ir ievadāms ar {@link JOptionPane} dialogu.</p>
+     * <p>
+     * Pareizā atbilde ir tā checkbox, kas ir atzīmēta. Jautājuma teksts ir
+     * ievadāms ar {@link JOptionPane} dialogu.</p>
      *
      * @return {@code true} ja saglabāšana veiksmīga; {@code false} citādi
      */
@@ -1901,6 +2052,7 @@ public class MainUserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel LabelSveikiAdmin;
     private javax.swing.JDialog LietotajaIzveleAdminLogs;
     private javax.swing.JDialog LietotajaIzveleLogs;
+    private javax.swing.JButton LietotajaLomaPoga;
     private javax.swing.JButton MainitParoliPoga;
     private javax.swing.JButton MainitParoliPoga1;
     private javax.swing.JDialog ParolesMainaLogs;
@@ -1918,7 +2070,7 @@ public class MainUserInterface extends javax.swing.JFrame {
     private javax.swing.JDialog TestaIzveidosanaLogs;
     private javax.swing.JButton VeidotTestuPoga;
     private javax.swing.JButton VidAtzime;
-    private javax.swing.JDialog VidAtzimelogs;
+    private javax.swing.JDialog VidAtzimeLogs;
     private javax.swing.JButton aizvertRez;
     private javax.swing.JButton aizvertRez1;
     private javax.swing.JComboBox<String> cbPareiza;

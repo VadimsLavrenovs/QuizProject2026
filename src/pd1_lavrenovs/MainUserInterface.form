@@ -872,6 +872,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="LietotajaLomaPoga" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="SaktTestuPoga" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="MainitParoliPoga1" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="VeidotTestuPoga" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
@@ -886,7 +887,9 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Component id="LabelSveikiAdmin" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
+                  <Component id="LietotajaLomaPoga" min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="SaktTestuPoga" min="-2" pref="36" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="VeidotTestuPoga" min="-2" pref="36" max="-2" attributes="0"/>
@@ -965,6 +968,20 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SaktTestuPogaMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="LietotajaLomaPoga">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="ff" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Lietot&#x101;ja loma"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="LietotajaLomaPogaMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
@@ -1207,9 +1224,9 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JDialog" name="VidAtzimelogs">
+    <Container class="javax.swing.JDialog" name="VidAtzimeLogs">
       <Events>
-        <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="VidAtzimelogsWindowClosing"/>
+        <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="VidAtzimeLogsWindowClosing"/>
       </Events>
 
       <Layout>

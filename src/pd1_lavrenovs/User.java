@@ -167,4 +167,58 @@ public class User {
         }
         return false;
     }
+    
+    /**
+     * Atgriež visu lietotāju sarakstu
+     * @return karte ID → vārds
+     */
+    public static java.util.Map<Integer, String> getAllUsers() {
+        java.util.LinkedHashMap<Integer, String> map = new java.util.LinkedHashMap<>();
+        String sql = "SELECT ID, NAME, ROLE FROM APP.USERS";
+        try (Connection con = DataBase.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                map.put(rs.getInt("ID"), rs.getString("NAME") + " (" + rs.getString("ROLE") + ")");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return map;
+    }
+
+    /**
+     * Maina lietotāja lomu
+     * @param userId lietotāja ID
+     * @param newRole jaunā loma
+     * @return true ja veiksmīgi
+     */
+    public static boolean changeRole(int userId, String newRole) {
+        String sql = "UPDATE APP.USERS SET ROLE = ? WHERE ID = ?";
+        try (Connection con = DataBase.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, newRole);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public static int getIdByLogin(String login) {
+    String sql = "SELECT ID FROM APP.USERS WHERE LOGIN = ?";
+    try (Connection con = DataBase.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, login);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) return rs.getInt("ID");
+        }
+    } catch (Exception ex) {
+        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return -1;
+
+    }    
 }

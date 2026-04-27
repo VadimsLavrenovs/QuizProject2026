@@ -32,6 +32,7 @@ public class MainUserInterface extends javax.swing.JFrame {
     Admin admin = new Admin("admin", "admin", "parole");
     Student studentTest = new Student("student", "student", "parole");
     Test test = new Test();
+    
     // --- Testa pildīšanas stāvokļa mainīgie ---
     /**
      * Pašreizējā jautājuma indekss testa laikā
@@ -153,6 +154,7 @@ public class MainUserInterface extends javax.swing.JFrame {
         IelogosanasPoga = new javax.swing.JButton();
         RegistracijasPoga = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
+        PaldzibasPoga = new javax.swing.JButton();
 
         RegistracijasLogs.setBackground(new java.awt.Color(255, 255, 255));
         RegistracijasLogs.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -359,7 +361,7 @@ public class MainUserInterface extends javax.swing.JFrame {
                 .addComponent(VidAtzime, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(MainitParoliPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         TestaIzveidosanaLogs.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -749,12 +751,16 @@ public class MainUserInterface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LietotajaIzveleAdminLogsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(LietotajaIzveleAdminLogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LietotajaLomaPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SaktTestuPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MainitParoliPoga1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(VeidotTestuPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(IerobezotSkPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58))
+                    .addGroup(LietotajaIzveleAdminLogsLayout.createSequentialGroup()
+                        .addGroup(LietotajaIzveleAdminLogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LietotajaLomaPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SaktTestuPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(VeidotTestuPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(IerobezotSkPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58))
+                    .addGroup(LietotajaIzveleAdminLogsLayout.createSequentialGroup()
+                        .addComponent(MainitParoliPoga1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         LietotajaIzveleAdminLogsLayout.setVerticalGroup(
             LietotajaIzveleAdminLogsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1015,6 +1021,15 @@ public class MainUserInterface extends javax.swing.JFrame {
             }
         });
 
+        PaldzibasPoga.setBackground(new java.awt.Color(255, 204, 204));
+        PaldzibasPoga.setForeground(new java.awt.Color(255, 102, 102));
+        PaldzibasPoga.setText("?");
+        PaldzibasPoga.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PaldzibasPogaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1030,13 +1045,18 @@ public class MainUserInterface extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addComponent(IelogosanasPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(jPasswordField1))
+                        .addGap(0, 13, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(RegistracijasPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPasswordField1))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addComponent(RegistracijasPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PaldzibasPoga)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1050,29 +1070,39 @@ public class MainUserInterface extends javax.swing.JFrame {
                     .addComponent(GalvLogsParole)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IelogosanasPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RegistracijasPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(IelogosanasPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RegistracijasPoga, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(PaldzibasPoga)
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
 
+    
     private void RegistracijasPogaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistracijasPogaMouseClicked
         RegistracijasLogs.setBounds(0, 0, 400, 400);
         this.setVisible(false);
+        RegistracijasLogs.setLocationRelativeTo(null);
         RegistracijasLogs.setVisible(true);
 
     }//GEN-LAST:event_RegistracijasPogaMouseClicked
 
     private void RegistracijasLogsWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_RegistracijasLogsWindowClosing
         RegistracijasLogs.dispose();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }//GEN-LAST:event_RegistracijasLogsWindowClosing
 
     private void AtpakalPogaRegMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AtpakalPogaRegMouseClicked
         RegistracijasLogs.dispose();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }//GEN-LAST:event_AtpakalPogaRegMouseClicked
 
@@ -1132,6 +1162,7 @@ public class MainUserInterface extends javax.swing.JFrame {
         jTextField1.setText("");               // ← notīra login lauku
         jPasswordField1.setText("");           // ← notīra paroles lauku
         LietotajaIzveleLogs.setVisible(false);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }//GEN-LAST:event_LietotajaIzveleLogsWindowClosing
 
@@ -1145,6 +1176,7 @@ public class MainUserInterface extends javax.swing.JFrame {
     private void MainitParoliPogaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MainitParoliPogaMouseClicked
         ParolesMainaLogs.setBounds(0, 0, 500, 300);
         LietotajaIzveleLogs.setVisible(false);
+        ParolesMainaLogs.setLocationRelativeTo(null);
         ParolesMainaLogs.setVisible(true);
     }//GEN-LAST:event_MainitParoliPogaMouseClicked
 
@@ -1163,6 +1195,7 @@ public class MainUserInterface extends javax.swing.JFrame {
 
     private void AtpakalPogaParoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AtpakalPogaParoleMouseClicked
         ParolesMainaLogs.dispose();
+        LietotajaIzveleLogs.setLocationRelativeTo(null);
         LietotajaIzveleLogs.setVisible(true);
     }//GEN-LAST:event_AtpakalPogaParoleMouseClicked
 
@@ -1181,11 +1214,13 @@ public class MainUserInterface extends javax.swing.JFrame {
     private void PilditTestuPogaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PilditTestuPogaMouseClicked
         SaktTestuLogs.pack();
         LietotajaIzveleLogs.setVisible(false);
+        SaktTestuLogs.setLocationRelativeTo(null);
         SaktTestuLogs.setVisible(true);
     }//GEN-LAST:event_PilditTestuPogaMouseClicked
 
     private void SaktTestuLogsWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_SaktTestuLogsWindowClosing
         SaktTestuLogs.dispose();
+        LietotajaIzveleLogs.setLocationRelativeTo(null);
         LietotajaIzveleLogs.setVisible(true);
     }//GEN-LAST:event_SaktTestuLogsWindowClosing
 
@@ -1267,6 +1302,7 @@ public class MainUserInterface extends javax.swing.JFrame {
     private void MainitParoliPoga1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MainitParoliPoga1MouseClicked
         ParolesMainaLogs.setBounds(0, 0, 500, 300);
         LietotajaIzveleAdminLogs.setVisible(false);
+        ParolesMainaLogs.setLocationRelativeTo(null);
         ParolesMainaLogs.setVisible(true);
     }//GEN-LAST:event_MainitParoliPoga1MouseClicked
 
@@ -1277,6 +1313,7 @@ public class MainUserInterface extends javax.swing.JFrame {
         jTextField1.setText("");               // ← notīra login lauku
         jPasswordField1.setText("");           // ← notīra paroles lauku
         LietotajaIzveleAdminLogs.setVisible(false);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }//GEN-LAST:event_LietotajaIzveleAdminLogsWindowClosing
 
@@ -1358,6 +1395,7 @@ public class MainUserInterface extends javax.swing.JFrame {
 
     private void TestaIzveidosanaLogsWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_TestaIzveidosanaLogsWindowClosing
         TestaIzveidosanaLogs.dispose();
+        LietotajaIzveleAdminLogs.setLocationRelativeTo(null);
         LietotajaIzveleAdminLogs.setVisible(true);
     }//GEN-LAST:event_TestaIzveidosanaLogsWindowClosing
 
@@ -1392,6 +1430,7 @@ public class MainUserInterface extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Reģistrācija veiksmīga!");
             dispose();
+            this.setLocationRelativeTo(null);
             this.setVisible(true);
             RegistracijasLogs.setVisible(false);
 
@@ -1567,6 +1606,7 @@ public class MainUserInterface extends javax.swing.JFrame {
             jTextField13.setText("");
             ParolesMainaLogs.dispose();
             // Atgriežas atpakaļ uz izvēlni
+            LietotajaIzveleLogs.setLocationRelativeTo(null);
             LietotajaIzveleLogs.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Pašreizējā parole ir nepareiza!");
@@ -1875,6 +1915,24 @@ public class MainUserInterface extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LietotajaLomaPogaMouseClicked
 
+    private void PaldzibasPogaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaldzibasPogaMouseClicked
+        JOptionPane.showMessageDialog(null,
+        "PALĪDZĪBA\n\n" +
+        "STUDENTS:\n" +
+        "• Pildīt testu — izvēlies testu un atbildi uz jautājumiem\n" +
+        "• Vidējā atzīme — redzi savu vidējo atzīmi\n" +
+        "• Mainīt paroli — nomainī savu paroli\n\n" +
+        "ADMINISTRATORS:\n" +
+        "• Lietotāja loma — mainīt lietotāju lomas\n" +
+        "• Veidot testu — izveido jaunu testu ar jautājumiem\n" +
+        "• Sākt testu — aktivizē testu studentiem\n" +
+        "• Ierobežot testu — uzstādi atkārtojumu skaitu\n" +
+        "• Mainīt lomu — mainī lietotāja lomu\n\n" +
+        "Problēmu gadījumā sazinieties ar administratoru.",
+        "Palīdzība",
+        JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_PaldzibasPogaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2055,6 +2113,7 @@ public class MainUserInterface extends javax.swing.JFrame {
     private javax.swing.JButton LietotajaLomaPoga;
     private javax.swing.JButton MainitParoliPoga;
     private javax.swing.JButton MainitParoliPoga1;
+    private javax.swing.JButton PaldzibasPoga;
     private javax.swing.JDialog ParolesMainaLogs;
     private javax.swing.JButton PilditTestuPoga;
     private javax.swing.JButton RegPogaReg;
